@@ -8,6 +8,7 @@ import { Provider } from "react-redux";
 // import loggerMiddleware from "./lib/loggerMiddleware";
 import { configureStore } from "@reduxjs/toolkit";
 import { createLogger } from "redux-logger";
+import ReduxThunk from "redux-thunk";
 
 // logger
 const logger = createLogger();
@@ -15,7 +16,7 @@ const logger = createLogger();
 // store - redux toolkit
 const store = configureStore({
   reducer: rootReducer,
-  middleware: [logger],
+  middleware: [logger, ReduxThunk],
 });
 const root = ReactDOM.createRoot(document.getElementById("root"));
 
