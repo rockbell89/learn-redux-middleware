@@ -1,5 +1,6 @@
 import { handleActions } from "redux-actions";
 import * as api from "../lib/api";
+import createRequestThunk from "../lib/createRequestThunk";
 
 const GET_POST = "sample/GET_POST";
 const GET_POST_SUCCESS = "sample/GET_POST_SUCCESS";
@@ -9,32 +10,35 @@ const GET_USERS = "sample/GET_USERS";
 const GET_USERS_SUCCESS = "sample/GET_USERS_SUCCESS";
 const GET_USERS_FAILURE = "sample/GET_USERS_FAILURE";
 
-export const getPost = (id) => async (dispatch) => {
-  dispatch({ type: GET_POST });
-  try {
-    const res = await api.getPost(id);
-    setTimeout(() => {
-      dispatch({ type: GET_POST_SUCCESS, payload: res.data });
-    }, 5000);
-  } catch (err) {
-    dispatch({ type: GET_POST_FAILURE, payload: err, error: true });
-    throw err;
-  }
-};
+export const getPost = createRequestThunk(GET_POST, api.getPost);
+export const getUsers = createRequestThunk(GET_USERS, api.getUsers);
 
-export const getUsers = () => async (dispatch) => {
-  dispatch({ type: GET_USERS });
-  try {
-    const res = await api.getUsers();
-    setTimeout(
-      () => dispatch({ type: GET_USERS_SUCCESS, payload: res.data }),
-      5000
-    );
-  } catch (err) {
-    dispatch({ type: GET_USERS_FAILURE, payload: err, error: true });
-    throw err;
-  }
-};
+// export const getPost = (id) => async (dispatch) => {
+//   dispatch({ type: GET_POST });
+//   try {
+//     const res = await api.getPost(id);
+//     setTimeout(() => {
+//       dispatch({ type: GET_POST_SUCCESS, payload: res.data });
+//     }, 5000);
+//   } catch (err) {
+//     dispatch({ type: GET_POST_FAILURE, payload: err, error: true });
+//     throw err;
+//   }
+// };
+
+// export const getUsers = () => async (dispatch) => {
+//   dispatch({ type: GET_USERS });
+//   try {
+//     const res = await api.getUsers();
+//     setTimeout(
+//       () => dispatch({ type: GET_USERS_SUCCESS, payload: res.data }),
+//       5000
+//     );
+//   } catch (err) {
+//     dispatch({ type: GET_USERS_FAILURE, payload: err, error: true });
+//     throw err;
+//   }
+// };
 
 const initialState = {
   loading: {
