@@ -1,10 +1,14 @@
 import "./App.css";
-// import CounterContainers from "./containers/CounterContainers";
+import CounterContainers from "./containers/CounterContainers";
 import SampleContainers from "./containers/SampleContainers";
 
 function App() {
-  // return <CounterContainers></CounterContainers>;
-  return <SampleContainers></SampleContainers>;
+  return (
+    <>
+      <CounterContainers></CounterContainers>
+      <SampleContainers></SampleContainers>
+    </>
+  );
 }
 
 export default App;
